@@ -1,0 +1,96 @@
+<html>
+<head>
+    <title>Form</title>
+    <style>
+        body {
+            color: yellow;
+        } 
+        h2{
+            color: red
+        
+        }
+        p.ex { 
+            color:rgb(0,0,255);
+
+        }
+        p.g  {
+             color:green;
+        }
+    </style>
+</head>
+<body>
+<h2>
+    <marquee direction="right" behavior="alternate" width="50%">
+        Demo Membuat Kontrol TEXT
+    </h2>
+    </marquee>
+<form>
+    <fieldset>
+        <legend>Formulir Kontrol Text</legend>
+        <p class="ex">Nama:</p>
+        <input type="text" name="txtNama" size="30">
+        <br /><br/>
+    
+<p class="or">Password:</p>
+<input type="text" name="txtPassword" size="40" />
+<br /><br />
+
+<p>File:</p>
+<input type="file" name="txtFile" />
+<br /><br />
+
+<p>Hidden Field:</p>
+<input type="Hidden" name="txtHidden" value="hidden value">
+<br /><br />
+
+<p>Checkbox:</p>
+<input type="checkbox" name="txtCheckbox" value="option1" /> Option1
+<input type="checkbox" name="txtCheckbox" value="option2"/> Option2
+<br /><br />
+
+<p>Radio Button:</p>
+<input type="radio" name="txtRadio" value="option1" /> Option1
+<input type="radio" name="txtRadio" value="option2" /> Option2
+<br /><br />
+
+<p>
+     <label for="txtJurusan">Jurusan:</label>
+     <select id="txtJurusan" name="txtJurusan">
+     <option value="PPLG">PPLG</option>
+     <option value="TJKT">TJKT</option>
+     <option value="AKUTANSI">AKUTANSI</option>
+     <option value="MPLB">MPLB</option>
+     <option value="Lainnya">Lainnya</option>
+ </select>
+      </p>
+<p>Hobi List:</p>
+<ul>
+    <li><input type="checkbox" name="txtHobi" value="hobi1" /> Hobi 1</li>
+    <li><input type="checkbox" name="txtHobi" value="hobi2" /> Hobi 2</li>
+    <li><input type="checkbox" name="txtHobi" value="hobi3" /> Hobi 3</li>
+</ul>
+<br /><br />
+
+<p class="ex">Alamat:</p>
+<textarea type="text" name="txtAlamat" rows="5" cols="50"></textarea>
+
+<p class="g">No Telepon:</p> 
+<input type="text" name="txtTelepon" size="20"/>
+<br /><br />
+
+<p>
+    <img src="c:\Users\Admin\Desktop\WhatsApp Image 2025-07-24 at 01.02.09_2d43ad58.jpg" alt="gambar" width="200" height="300">
+</p>
+<p>
+<video controls>
+    <source src="c:\Users\Admin\Downloads\ssstik.io_@bejasuwitaaa_1754989877769.mp4" type="video/mp4"/>
+</video>
+</p>
+<br /><br />
+
+<p><input type="submit" value="Submit" /><input type="reset" value="Reset"/>
+    </p>
+    </fieldset>
+</form>
+</body>
+</html>
