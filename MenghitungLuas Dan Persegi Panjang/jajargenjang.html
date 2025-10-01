@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Menghitung Luas dan Keliling Jajargenjang</title>
+<script type="text/javascript">
+     function hitungluaskeliling(){
+         let alas  = parseFloat(document.getElementById("alas").value);
+         let tinggi = parseFloat(document.getElementById("tinggi").value);
+         let sisiMiring = parseFloat(document.getElementById("sisiMiring").value);
+
+         if(isNaN(alas) || isNaN(tinggi) || isNaN(sisiMiring)){
+             alert("Masukkan angka yang valid untuk alas, tinggi, dan sisi miring!");
+             return;
+         }
+         let luas = alas * tinggi;
+         let keliling = 2 * (alas + sisiMiring);
+         document.getElementById("luas").value = luas;
+         document.getElementById("keliling").value = keliling;
+     }
+</script>
+</head>
+<body>
+   <form>
+    <h4>Menghitung Luas dan Keliling Jajargenjang</h4>
+      <table>
+         <tr>
+              <td>Alas</td>
+              <td>:</td>
+              <td><input type="text" id="alas" name="alas"></td>
+         </tr>
+         <tr>
+              <td>Tinggi</td>
+              <td>:</td>
+              <td><input type="text" id="tinggi" name="tinggi"></td>
+         </tr>
+         <tr>
+              <td>Sisi Miring</td>
+              <td>:</td>
+              <td><input type="text" id="sisiMiring" name="sisiMiring"></td>
+         </tr>
+         <tr>
+              <td>Luas</td>
+              <td>:</td>
+              <td><input type="text" id="luas" name="luas" disabled size="10"></td>
+         </tr>
+          <tr>
+              <td>Keliling</td>
+              <td>:</td>
+              <td><input type="text" id="keliling" name="keliling" disabled size="10"></td>
+         </tr>
+         <tr>
+              <td></td>
+              <td></td>
+              <td><input type="button" value="Hitung" onClick="hitungluaskeliling()"></td>
+         </tr>
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Game Ular Tangga</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f4f4;
+    }
+    #board {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(10, 50px);
+      grid-template-rows: repeat(10, 50px);
+      width: 500px;
+      margin: 20px auto;
+      border: 3px solid #333;
+      background: #fff;
+    }
+    .cell {
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      position: relative;
+    }
+    .player {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 5px;
+    }
+    .p1 { background: red; left: 5px; }
+    .p2 { background: blue; right: 5px; }
+    #controls {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    /* Tangga */
+    .ladder {
+      position: absolute;
+      width: 6px;
+      background: brown;
+      z-index: 0;
+    }
+    /* Ular */
+    .snake {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Game Ular Tangga 🎲🐍</h1>
+  <div id="board"></div>
+
+  <!-- Tangga -->
+  <div class="ladder" style="top:320px; left:60px; height:120px; transform: rotate(-30deg);"></div>
+  <div class="ladder" style="top:160px; left:220px; height:150px; transform: rotate(25deg);"></div>
+
+  <!-- Ular (pakai SVG sederhana) -->
+  <svg class="snake" style="top:50px; left:350px;" viewBox="0 0 100 100">
+    <path d="M10 80 Q 40 20, 90 70" stroke="green" stroke-width="8" fill="none"/>
+    <circle cx="90" cy="70" r="8" fill="red"/> <!-- kepala -->
+  </svg>
+
+  <svg class="snake" style="top:280px; left:120px;" viewBox="0 0 100 100">
+    <path d="M90 20 Q 50 90, 10 30" stroke="purple" stroke-width="8" fill="none"/>
+    <circle cx="10" cy="30" r="8" fill="orange"/>
+  </svg>
+
+  <div id="controls">
+    <p><b>Giliran:</b> <span id="turn">Pemain 1</span></p>
+    <p><b>Hasil Dadu:</b> <span id="dice">-</span></p>
+    <button onclick="rollDice()">Lempar Dadu</button>
+  </div>
+
+  <script>
+    const board = document.getElementById("board");
+    const diceDisplay = document.getElementById("dice");
+    const turnDisplay = document.getElementById("turn");
+
+    let cells = [];
+    let players = [
+      { position: 1, element: null },
+      { position: 1, element: null }
+    ];
+    let currentPlayer = 0;
+
+    // Ular & Tangga (posisi awal : posisi akhir)
+    const snakesLadders = {
+      3: 22, 5: 8, 11: 26, 20: 29,   // Tangga
+      27: 1, 21: 9, 17: 4, 19: 7     // Ular
+    };
+
+    // Buat papan 1-100
+    function createBoard() {
+      let reverse = false;
+      let number = 100;
+      for (let row = 0; row < 10; row++) {
+        let rowCells = [];
+        for (let col = 0; col < 10; col++) {
+          let cell = document.createElement("div");
+          cell.classList.add("cell");
+          cell.textContent = number;
+          board.appendChild(cell);
+          rowCells.push(cell);
+          number--;
+        }
+        if (reverse) rowCells.reverse();
+        cells = cells.concat(rowCells);
+        reverse = !reverse;
+      }
+    }
+
+    // Update posisi pemain
+    function updatePlayers() {
+      document.querySelectorAll(".player").forEach(el => el.remove());
+      players.forEach((p, index) => {
+        let playerEl = document.createElement("div");
+        playerEl.classList.add("player", index === 0 ? "p1" : "p2");
+        p.element = playerEl;
+        cells[100 - p.position].appendChild(playerEl);
+      });
+    }
+
+    // Lempar dadu
+    function rollDice() {
+      let roll = Math.floor(Math.random() * 6) + 1;
+      diceDisplay.textContent = roll;
+      let player = players[currentPlayer];
+      player.position += roll;
+
+      // Jika lebih dari 100, tetap di tempat
+      if (player.position > 100) {
+        player.position -= roll;
+      }
+
+      // Cek ular/tangga
+      if (snakesLadders[player.position]) {
+        player.position = snakesLadders[player.position];
+      }
+
+      updatePlayers();
+
+      // Cek menang
+      if (player.position === 100) {
+        alert(`Pemain ${currentPlayer + 1} MENANG!`);
+        resetGame();
+        return;
+      }
+
+      // Ganti giliran
+      currentPlayer = (currentPlayer + 1) % 2;
+      turnDisplay.textContent = `Pemain ${currentPlayer + 1}`;
+    }
+
+    function resetGame() {
+      players[0].position = 1;
+      players[1].position = 1;
+      currentPlayer = 0;
+      updatePlayers();
+      turnDisplay.textContent = "Pemain 1";
+      diceDisplay.textContent = "-";
+    }
+
+    createBoard();
+    updatePlayers();
+  </script>
+</body>
+</html>

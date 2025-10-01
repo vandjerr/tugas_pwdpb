@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Menghitung Luas dan Keliling Segitiga</title>
+<script type="text/javascript">
+     function hitungluaskeliling(){
+         let alas = parseFloat(document.getElementById("alas").value);
+         let tinggi = parseFloat(document.getElementById("tinggi").value);
+         let sisi = parseFloat(document.getElementById("sisi").value);
+
+         if (isNaN(alas) || isNaN(tinggi) || isNaN(sisi) || alas <= 0 || tinggi <= 0 || sisi <= 0) {
+             alert("Masukkan nilai yang benar!");
+             return;
+         }
+
+         let luas = (alas * tinggi) / 2;
+         let keliling = 3 * sisi;   // segitiga sama sisi
+
+         document.getElementById("luas").value = luas.toFixed(2);
+         document.getElementById("keliling").value = keliling.toFixed(2);
+     }
+</script>
+</head>
+<body>
+   <form>
+    <h4>Menghitung Luas dan Keliling Segitiga Sama Sisi</h4>
+      <table>
+         <tr>
+              <td>Alas</td>
+              <td>:</td>
+              <td><input type="text" id="alas" name="alas"></td>
+         </tr>
+         <tr>
+              <td>Tinggi</td>
+              <td>:</td>
+              <td><input type="text" id="tinggi" name="tinggi"></td>
+         </tr> 
+          <tr>
+              <td>Sisi</td>
+              <td>:</td>
+              <td><input type="text" id="sisi" name="sisi"></td>
+         </tr> 
+          <tr>
+              <td>Luas</td>
+              <td>:</td>
+              <td><input type="text" id="luas" name="luas" disabled size="10"></td>
+         </tr>
+          <tr>
+              <td>Keliling</td>
+              <td>:</td>
+              <td><input type="text" id="keliling" name="keliling" disabled size="10"></td>
+         </tr>
+         <tr>
+              <td></td>
+              <td></td>
+              <td><input type="button" value="Hitung Luas & Keliling" onClick="hitungluaskeliling()"></td>
+         </tr>
+        </table>
+    </form>
+</body>
+</html>
